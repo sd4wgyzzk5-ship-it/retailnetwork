@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retail Network | Founder Stories</title>
+<meta name="description" content="Connecting retail professionals and sharing stories from founders and business leaders.">
+
+<style>
+:root {
+  --maroon: #40101F;
+  --white: #FFFFFF;
+  --soft: #FAF6F7;
+  --text: #24151A;
+  --muted: #766B6F;
+  --line: #EADFE2;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: var(--text);
+  background: var(--white);
+  line-height: 1.6;
+}
+a { text-decoration: none; color: inherit; }
+.wrap { width: 92%; max-width: 1160px; margin: auto; }
+
+header {
+  background: var(--maroon);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.nav {
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+.brand img { width: 48px; height: 48px; object-fit: contain; }
+.brand small {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 1px;
+  font-weight: normal;
+}
+nav { display: flex; gap: 18px; }
+nav a { font-size: 11px; font-weight: bold; }
+nav a:hover { opacity: .7; }
+.menu {
+  display: none;
+  color: white;
+  background: transparent;
+  border: 1px solid white;
+  padding: 9px 12px;
+}
+
+.hero {
+  background: var(--maroon);
+  color: white;
+  padding: 75px 0;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.5fr .6fr;
+  align-items: center;
+  gap: 35px;
+}
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+h1 {
+  font-size: clamp(42px, 6vw, 75px);
+  line-height: 1.05;
+  margin: 18px 0;
+}
+.hero p { color: #F0E6E9; max-width: 600px; }
+.hero-logo { width: 230px; max-width: 100%; }
+.btn {
+  display: inline-block;
+  background: white;
+  color: var(--maroon);
+  padding: 13px 20px;
+  margin-top: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 4px;
+}
+.stats { display: flex; gap: 35px; margin-top: 40px; }
+.stats strong { display: block; font-size: 23px; }
+.stats span { font-size: 10px; }
+
+section { padding: 70px 0; }
+.soft { background: var(--soft); }
+.label {
+  color: var(--maroon);
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+h2 { color: var(--maroon); font-size: 32px; margin: 8px 0; }
+.sub { color: var(--muted); font-size: 14px; }
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+.search {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  width: 280px;
+  max-width: 100%;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+.founder {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 16px;
+  padding: 17px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: white;
+}
+.portrait {
+  width: 110px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 4px;
+  background: var(--soft);
+}
+.company {
+  color: var(--maroon);
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.founder h3 { color: var(--maroon); margin: 7px 0 0; }
+.role { color: var(--muted); font-size: 12px; }
+.quote { font-size: 13px; }
+.tag {
+  display: inline-block;
+  padding: 4px 8px;
+  background: #F6EDF0;
+  color: var(--maroon);
+  font-size: 10px;
+}
+.date { font-size: 10px; color: var(--muted); margin-top: 8px; }
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.video {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.video-thumb {
+  height: 150px;
+  background: var(--maroon);
+  color: white;
+  display: grid;
+  place-items: center;
+  font-size: 35px;
+}
+.video-info { padding: 15px; }
+.video-info h3 { color: var(--maroon); }
+.video-info small { color: var(--maroon); font-weight: bold; }
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+.panel {
+  background: var(--soft);
+  border: 1px solid var(--line);
+  padding: 25px;
+}
+.panel h3 { color: var(--maroon); }
+.timeline { border-left: 2px solid var(--maroon); padding-left: 20px; }
+.timeline p { color: var(--muted); }
+.timeline strong { color: var(--maroon); display: block; }
+
+.socials {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.social {
+  padding: 18px;
+  background: white;
+  border: 1px solid var(--line);
+  color: var(--maroon);
+  text-align: center;
+  font-weight: bold;
+  border-radius: 5px;
+}
+.social small {
+  display: block;
+  color: var(--muted);
+  font-weight: normal;
+}
+.contact {
+  padding: 25px;
+  background: var(--soft);
+  border: 1px solid var(--line);
+}
+.contact a { color: var(--maroon); font-weight: bold; }
+
+footer {
+  background: var(--maroon);
+  color: white;
+  padding: 28px 0;
+  font-size: 12px;
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@media(max-width:850px) {
+  nav {
+    display: none;
+    position: absolute;
+    top: 78px;
+    left: 0;
+    right: 0;
+    background: var(--maroon);
+    padding: 20px;
+    flex-direction: column;
+  }
+  nav.open { display: flex; }
+  .menu { display: block; }
+  .hero-grid { grid-template-columns: 1fr .4fr; }
+  .cards { grid-template-columns: 1fr; }
+  .split { grid-template-columns: 1fr; }
+  .video-grid { grid-template-columns: 1fr 1fr; }
+}
+@media(max-width:550px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-logo { width: 140px; }
+  .section-head { flex-direction: column; align-items: flex-start; }
+  .search { width: 100%; }
+  .founder { grid-template-columns: 85px 1fr; padding: 12px; }
+  .portrait { width: 85px; height: 110px; }
+  .video-grid { grid-template-columns: 1fr; }
+  .socials { grid-template-columns: 1fr 1fr; }
+  .stats { gap: 15px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="wrap nav">
+<a class="brand" href="#home">
+<img src="logo.png" alt="Retail Network Logo">
+<div>RETAIL NETWORK
+<small>CONNECTING RETAIL PROFESSIONALS</small></div>
+</a>
+<button class="menu" onclick="document.querySelector('nav').classList.toggle('open')">MENU ☰</button>
+<nav>
+<a href="#home">HOME</a>
+<a href="#interviews">INTERVIEWS</a>
+<a href="#about">ABOUT</a>
+<a href="#videos">VIDEOS</a>
+<a href="#story">OUR STORY</a>
+<a href="#founder">FOUNDER</a>
+<a href="#social">SOCIAL</a>
+<a href="#contact">CONTACT</a>
+</nav>
+</div>
+</header>
+
+<main>
+
+<section class="hero" id="home">
+<div class="wrap hero-grid">
+<div>
+<div class="eyebrow">PEOPLE · IDEAS · BUSINESS</div>
+<h1>Real stories.<br>Remarkable founders.</h1>
+<p>Connecting retail professionals and sharing the journeys, ideas and ambitions of founders and business leaders from around the world.</p>
+<a class="btn" href="#interviews">EXPLORE FOUNDER INTERVIEWS ↗️</a>
+<div class="stats">
+<div><strong>01</strong><span>FOUNDER STORIES</span></div>
+<div><strong>Global</strong><span>RETAIL COMMUNITY</span></div>
+<div><strong>2025</strong><span>PROJECT START</span></div>
+</div>
+</div>
+<img class="hero-logo" src="logo.png" alt="Retail Network">
+</div>
+</section>
+
+<section id="interviews">
+<div class="wrap">
+<div class="section-head">
+<div>
+<div class="label">THE CONVERSATIONS</div>
+<h2>Founder Interviews</h2>
+<p class="sub">Meet the people building companies and shaping industries.</p>
+</div>
+<input class="search" id="search" placeholder="Search founder or company..." oninput="filterCards()">
+</div>
+
+<div class="cards">
+<article class="founder" data-search="alex morgan northstar ventures">
+<img class="portrait" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400" alt="Founder">
+<div>
+<div class="company">Northstar Ventures</div>
+<h3>Alex Morgan</h3>
+<div class="role">Founder at Northstar Ventures</div>
+<p class="quote">“Build with purpose, stay close to your customers, and keep learning.”</p>
+<span class="tag">Leadership & Growth</span>
+<div class="date">INTERVIEW DATE · 12 OCT 2026</div>
+</div>
+</article>
+
+<article class="founder" data-search="sarah williams retail horizon">
+<img class="portrait" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400" alt="Founder">
+<div>
+<div class="company">Retail Horizon</div>
+<h3>Sarah Williams</h3>
+<div class="role">Founder at Retail Horizon</div>
+<p class="quote">“Great retail experiences begin when you truly understand people.”</p>
+<span class="tag">Retail Innovation</span>
+<div class="date">INTERVIEW DATE · 05 OCT 2026</div>
+</div>
+</article>
+</div>
+<p class="sub">Demo profiles only. Replace them with your real interviews.</p>
+</div>
+</section>
+
+<section class="soft" id="videos">
+<div class="wrap">
+<div class="label">WATCH & DISCOVER</div>
+<h2>Featured Videos</h2>
+<p class="sub">Selected conversations from our social channels.</p>
+<div class="video-grid">
+<div class="video"><div class="video-thumb">▶️</div><div class="video-info"><small>YOUTUBE</small><h3>Founder Conversation – Episode 01</h3><p class="sub">Add your YouTube video link.</p></div></div>
+<div class="video"><div class="video-thumb">▶️</div><div class="video-info"><small>TIKTOK</small><h3>A Dream Worth Building</h3><p class="sub">Add your TikTok video link.</p></div></div>
+<div class="video"><div class="video-thumb">▶️</div><div class="video-info"><small>INSTAGRAM</small><h3>Inside the Retail World</h3><p class="sub">Add your Instagram video link.</p></div></div>
+</div>
+</div>
+</section>
+
+<section id="about">
+<div class="wrap split">
+<div>
+<div class="label">WHO WE ARE</div>
+<h2>About Retail Network</h2>
+<p class="sub">Retail Network is a digital media and networking initiative focused on connecting retail professionals, sharing real career journeys and giving founders a platform to tell their stories.</p>
+<p class="sub">Through interviews and short-form videos, we aim to inspire people and build meaningful connections across the retail community.</p>
+</div>
+<div class="panel">
+<h3>Our Mission</h3>
+<p class="sub">To connect people, amplify voices and make real-world experience more accessible.</p>
+<h3>Our Vision</h3>
+<p class="sub">A global community where retail professionals, entrepreneurs and business leaders learn from one another.</p>
+</div>
+</div>
+</section>
+
+<section class="soft" id="story">
+<div class="wrap split">
+<div>
+<div class="label">THE JOURNEY</div>
+<h2>Our Story</h2>
+<p class="sub">Tell the story of how Retail Network began, what inspired the first interviews and how the community is growing.</p>
+</div>
+<div class="timeline">
+<p><strong>2025 – The Beginning</strong>Add your real starting story here.</p>
+<p><strong>Growing the Community</strong>Describe your first interviews and connections.</p>
+<p><strong>The Road Ahead</strong>Share your future plans.</p>
+</div>
+</div>
+</section>
+
+<section id="founder">
+<div class="wrap split">
+<div>
+<div class="label">BEHIND THE PLATFORM</div>
+<h2>Meet the Founder</h2>
+<p class="sub">Introduce yourself, your background, why you started Retail Network and how you manage interviews and content.</p>
+<h3>[Your Name]</h3>
+<p class="sub">Founder, Retail Network</p>
+</div>
+<div class="panel">
+<h3>What Drives This Platform?</h3>
+<p class="sub">Curiosity, conversations and the belief that every professional has a story worth sharing.</p>
+</div>
+</div>
+</section>
+
+<section class="soft" id="social">
+<div class="wrap">
+<div class="label">STAY CONNECTED</div>
+<h2>Follow Retail Network</h2>
+<p class="sub">Find our latest interviews, videos and updates.</p>
+<div class="socials">
+<a class="social" href="https://instagram.com/" target="_blank">Instagram<small>Follow us</small></a>
+<a class="social" href="https://youtube.com/" target="_blank">YouTube<small>Watch videos</small></a>
+<a class="social" href="https://tiktok.com/" target="_blank">TikTok<small>Watch Reels</small></a>
+<a class="social" href="https://facebook.com/" target="_blank">Facebook<small>Visit our page</small></a>
+<a class="social" href="https://linkedin.com/" target="_blank">LinkedIn<small>Connect with us</small></a>
+<a class="social" href="https://whatsapp.com/" target="_blank">WhatsApp<small>Contact us</small></a>
+<a class="social" href="https://bilibili.com/" target="_blank">BiliBili<small>Watch videos</small></a>
+</div>
+</div>
+</section>
+
+<section id="contact">
+<div class="wrap split">
+<div>
+<div class="label">GET IN TOUCH</div>
+<h2>Contact Us</h2>
+<p class="sub">Interested in an interview, collaboration or partnership? Reach out to Retail Network.</p>
+</div>
+<div class="contact">
+<p><strong>Email</strong><br><a href="mailto:your-email@example.com">your-email@example.com</a></p>
+<p><strong>Location</strong><br>Doha, Qatar</p>
+<p><strong>Social Media</strong><br><a href="#social">Connect with us ↗️</a></p>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer>
+<div class="wrap footer">
+<strong>RETAIL NETWORK</strong>
+<span>Connecting Retail Professionals in Qatar & Beyond.</span>
+<span>©️ <span id="year"></span> Retail Network</span>
+</div>
+</footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+function filterCards() {
+  const query = document.getElementById("search").value.toLowerCase();
+  document.querySelectorAll(".founder").forEach(card => {
+    card.style.display = card.dataset.search.includes(query) ? "grid" : "none";
+  });
+}
+
+document.querySelectorAll("nav a").forEach(link => {
+  link.addEventListener("click", () => {
+    document.querySelector("nav").classList.remove("open");
+  });
+});
+</script>
+
+</body>
+</html>
