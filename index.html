@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Retail Network | Founder Stories</title>
-<meta name="description" content="Connecting retail professionals and sharing stories from founders and business leaders.">
+<title>Retail Network | CEO &amp; Founder Interviews</title>
+<meta name="description" content="Exclusive one-on-one interviews with visionary CEOs, founders, and business leaders.">
 
 <style>
 :root {
@@ -43,17 +43,18 @@ header {
 }
 .brand {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  align-items: flex-start;
   font-weight: 900;
   letter-spacing: 1.5px;
+  line-height: 1.15;
 }
-.brand img { width: 48px; height: 48px; object-fit: contain; }
 .brand small {
   display: block;
   font-size: 9px;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
   font-weight: normal;
+  margin-top: 5px;
 }
 nav { display: flex; gap: 18px; }
 nav a { font-size: 11px; font-weight: bold; }
@@ -70,10 +71,11 @@ nav a:hover { opacity: .7; }
   background: var(--maroon);
   color: white;
   padding: 75px 0;
+  overflow: hidden;
 }
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.5fr .6fr;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, .6fr);
   align-items: center;
   gap: 35px;
 }
@@ -88,7 +90,31 @@ h1 {
   margin: 18px 0;
 }
 .hero p { color: #F0E6E9; max-width: 600px; }
-.hero-logo { width: 230px; max-width: 100%; }
+.hero-visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+}
+.hero-visual::before {
+  content: "";
+  position: absolute;
+  inset: -12%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 52% 48%, rgba(183, 125, 144, .12) 0%, rgba(143, 76, 97, .08) 36%, rgba(64, 16, 31, 0) 76%);
+  filter: blur(36px);
+  z-index: -1;
+  pointer-events: none;
+}
+.hero-logo {
+  display: block;
+  width: clamp(220px, 26vw, 300px);
+  max-width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+  mix-blend-mode: lighten;
+}
 .btn {
   display: inline-block;
   background: white;
@@ -99,9 +125,36 @@ h1 {
   font-weight: bold;
   border-radius: 4px;
 }
-.stats { display: flex; gap: 35px; margin-top: 40px; }
-.stats strong { display: block; font-size: 23px; }
-.stats span { font-size: 10px; }
+.stats {
+  display: flex;
+  gap: 10px;
+  margin-top: 40px;
+}
+.stat {
+  min-width: 120px;
+  padding: 8px;
+  color: white;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease;
+}
+.stat:hover, .stat[aria-pressed="true"] {
+  background: rgba(255, 255, 255, .12);
+  transform: translateY(-2px);
+}
+.stat:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 3px;
+}
+.filter-btn:focus-visible {
+  outline: 2px solid var(--maroon);
+  outline-offset: 3px;
+}
+.stat strong { display: block; font-size: 23px; }
+.stat span { font-size: 10px; }
 
 section { padding: 70px 0; }
 .soft { background: var(--soft); }
@@ -126,6 +179,27 @@ h2 { color: var(--maroon); font-size: 32px; margin: 8px 0; }
   border-radius: 4px;
   width: 280px;
   max-width: 100%;
+}
+.filter-row { margin: -5px 0 25px; }
+.filter-btn {
+  padding: 9px 14px;
+  color: var(--maroon);
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.filter-btn:hover, .filter-btn[aria-pressed="true"] {
+  color: white;
+  background: var(--maroon);
+  border-color: var(--maroon);
+}
+.empty-results {
+  color: var(--muted);
+  padding: 18px 0;
 }
 
 .cards {
@@ -173,9 +247,19 @@ h2 { color: var(--maroon); font-size: 32px; margin: 8px 0; }
   gap: 16px;
 }
 .video {
+  display: block;
   border: 1px solid var(--line);
   border-radius: 6px;
   overflow: hidden;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.video:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(64, 16, 31, .12);
+}
+.video:focus-visible {
+  outline: 2px solid var(--maroon);
+  outline-offset: 3px;
 }
 .video-thumb {
   height: 150px;
@@ -195,6 +279,35 @@ h2 { color: var(--maroon); font-size: 32px; margin: 8px 0; }
   gap: 40px;
   align-items: center;
 }
+.founder-profile {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  gap: 40px;
+  align-items: center;
+}
+.founder-profile-image {
+  display: block;
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 14px 32px rgba(64, 16, 31, .14);
+}
+.founder-profile h3 {
+  color: var(--maroon);
+  font-size: 24px;
+  margin: 18px 0 4px;
+}
+.founder-profile-title {
+  color: var(--muted);
+  font-weight: bold;
+  margin-top: 0;
+}
+.founder-bio {
+  color: var(--muted);
+  line-height: 1.75;
+}
 .panel {
   background: var(--soft);
   border: 1px solid var(--line);
@@ -211,6 +324,7 @@ h2 { color: var(--maroon); font-size: 32px; margin: 8px 0; }
   gap: 12px;
 }
 .social {
+  display: block;
   padding: 18px;
   background: white;
   border: 1px solid var(--line);
@@ -218,18 +332,94 @@ h2 { color: var(--maroon); font-size: 32px; margin: 8px 0; }
   text-align: center;
   font-weight: bold;
   border-radius: 5px;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.social:hover {
+  transform: translateY(-3px);
+  border-color: var(--maroon);
+  box-shadow: 0 8px 18px rgba(64, 16, 31, .12);
+}
+.social:focus-visible {
+  outline: 2px solid var(--maroon);
+  outline-offset: 3px;
 }
 .social small {
   display: block;
   color: var(--muted);
   font-weight: normal;
 }
-.contact {
-  padding: 25px;
+.contact-layout {
+  display: grid;
+  grid-template-columns: minmax(230px, .8fr) minmax(0, 1.2fr);
+  gap: 24px;
+  align-items: start;
+}
+.contact-details,
+.contact-form {
+  padding: 24px;
   background: var(--soft);
   border: 1px solid var(--line);
+  border-radius: 6px;
 }
-.contact a { color: var(--maroon); font-weight: bold; }
+.contact-details p { margin: 0 0 20px; }
+.contact-details p:last-child { margin-bottom: 0; }
+.contact-details strong { color: var(--maroon); }
+.contact-details a { color: var(--maroon); font-weight: bold; }
+.contact-form {
+  display: grid;
+  gap: 14px;
+}
+.contact-field {
+  display: grid;
+  gap: 6px;
+  color: var(--maroon);
+  font-size: 12px;
+  font-weight: bold;
+}
+.contact-field input,
+.contact-field textarea {
+  width: 100%;
+  padding: 12px;
+  color: var(--text);
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: normal;
+}
+.contact-field textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+.contact-field input:focus,
+.contact-field textarea:focus {
+  outline: 2px solid rgba(64, 16, 31, .35);
+  outline-offset: 1px;
+  border-color: var(--maroon);
+}
+.contact-submit {
+  justify-self: start;
+  padding: 13px 20px;
+  color: white;
+  background: var(--maroon);
+  border: 0;
+  border-radius: 4px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.contact-submit:hover { opacity: .9; }
+.contact-submit:focus-visible {
+  outline: 2px solid var(--maroon);
+  outline-offset: 3px;
+}
+.contact-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
 
 footer {
   background: var(--maroon);
@@ -257,21 +447,25 @@ footer {
   }
   nav.open { display: flex; }
   .menu { display: block; }
-  .hero-grid { grid-template-columns: 1fr .4fr; }
+  .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(190px, .4fr); }
   .cards { grid-template-columns: 1fr; }
   .split { grid-template-columns: 1fr; }
+  .contact-layout { grid-template-columns: 1fr; }
+  .founder-profile { grid-template-columns: minmax(220px, .8fr) minmax(0, 1.2fr); gap: 24px; }
   .video-grid { grid-template-columns: 1fr 1fr; }
 }
 @media(max-width:550px) {
   .hero-grid { grid-template-columns: 1fr; }
-  .hero-logo { width: 140px; }
+  .hero-logo { width: clamp(190px, 62vw, 250px); justify-self: center; }
   .section-head { flex-direction: column; align-items: flex-start; }
   .search { width: 100%; }
   .founder { grid-template-columns: 85px 1fr; padding: 12px; }
   .portrait { width: 85px; height: 110px; }
+  .founder-profile { grid-template-columns: 1fr; gap: 24px; }
+  .founder-profile-image { max-width: 260px; margin: 0 auto; }
   .video-grid { grid-template-columns: 1fr; }
   .socials { grid-template-columns: 1fr 1fr; }
-  .stats { gap: 15px; }
+  .stats { gap: 8px; }
 }
 </style>
 </head>
@@ -281,9 +475,8 @@ footer {
 <header>
 <div class="wrap nav">
 <a class="brand" href="#home">
-<img src="logo.png" alt="Retail Network Logo">
 <div>RETAIL NETWORK
-<small>CONNECTING RETAIL PROFESSIONALS</small></div>
+<small>FOUNDER &amp; CEO INTERVIEWS</small></div>
 </a>
 <button class="menu" onclick="document.querySelector('nav').classList.toggle('open')">MENU ☰</button>
 <nav>
@@ -306,15 +499,15 @@ footer {
 <div>
 <div class="eyebrow">PEOPLE · IDEAS · BUSINESS</div>
 <h1>Real stories.<br>Remarkable founders.</h1>
-<p>Connecting retail professionals and sharing the journeys, ideas and ambitions of founders and business leaders from around the world.</p>
+<p>Unlocking the minds of visionary CEOs, founders, and business leaders through exclusive one-on-one interviews.</p>
 <a class="btn" href="#interviews">EXPLORE FOUNDER INTERVIEWS ↗️</a>
-<div class="stats">
-<div><strong>01</strong><span>FOUNDER STORIES</span></div>
-<div><strong>Global</strong><span>RETAIL COMMUNITY</span></div>
-<div><strong>2025</strong><span>PROJECT START</span></div>
+<div class="stats" aria-label="Interview category">
+<button class="stat" type="button" data-category="founders" aria-pressed="true"><strong>12</strong><span>FOUNDERS</span></button>
 </div>
 </div>
-<img class="hero-logo" src="logo.png" alt="Retail Network">
+<div class="hero-visual">
+<img class="hero-logo" src="https://i.ibb.co/Jwj5Qt8f/wd.webp" alt="Retail Network logo">
+</div>
 </div>
 </section>
 
@@ -326,11 +519,27 @@ footer {
 <h2>Founder Interviews</h2>
 <p class="sub">Meet the people building companies and shaping industries.</p>
 </div>
-<input class="search" id="search" placeholder="Search founder or company..." oninput="filterCards()">
+<input class="search" id="search" type="search" placeholder="Search founder or company..." aria-label="Search interviews">
+</div>
+
+<div class="filter-row">
+<button class="filter-btn" id="all-filter" type="button" aria-pressed="false">All interviews</button>
 </div>
 
 <div class="cards">
-<article class="founder" data-search="alex morgan northstar ventures">
+<article class="founder" data-category="founders" data-search="hamad mubarak al-hajri snoonu founder ceo">
+<img class="portrait" src="https://i.ibb.co/WpPLf1qK/hamad.webp" alt="Hamad Mubarak Al-Hajri">
+<div>
+<div class="company">SNOONU</div>
+<h3>Hamad Mubarak Al-Hajri</h3>
+<div class="role">Founder and CEO of Snoonu</div>
+<p class="quote">“Building the biggest technology company from the Arab world to leave a lasting impact.”</p>
+<span class="tag">Vision &amp; Technology</span>
+<div class="date">INTERVIEW DATE · 19 SEP 2026</div>
+</div>
+</article>
+
+<article class="founder" data-category="founders" data-search="alex morgan northstar ventures">
 <img class="portrait" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400" alt="Founder">
 <div>
 <div class="company">Northstar Ventures</div>
@@ -342,7 +551,7 @@ footer {
 </div>
 </article>
 
-<article class="founder" data-search="sarah williams retail horizon">
+<article class="founder" data-category="founders" data-search="sarah williams retail horizon">
 <img class="portrait" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400" alt="Founder">
 <div>
 <div class="company">Retail Horizon</div>
@@ -354,6 +563,7 @@ footer {
 </div>
 </article>
 </div>
+<p class="empty-results" id="empty-results" hidden>No interviews match this category and search.</p>
 <p class="sub">Demo profiles only. Replace them with your real interviews.</p>
 </div>
 </section>
@@ -364,9 +574,9 @@ footer {
 <h2>Featured Videos</h2>
 <p class="sub">Selected conversations from our social channels.</p>
 <div class="video-grid">
-<div class="video"><div class="video-thumb">▶️</div><div class="video-info"><small>YOUTUBE</small><h3>Founder Conversation – Episode 01</h3><p class="sub">Add your YouTube video link.</p></div></div>
-<div class="video"><div class="video-thumb">▶️</div><div class="video-info"><small>TIKTOK</small><h3>A Dream Worth Building</h3><p class="sub">Add your TikTok video link.</p></div></div>
-<div class="video"><div class="video-thumb">▶️</div><div class="video-info"><small>INSTAGRAM</small><h3>Inside the Retail World</h3><p class="sub">Add your Instagram video link.</p></div></div>
+<a class="video" href="https://www.youtube.com/@Retail_network" target="_blank" rel="noopener noreferrer"><div class="video-thumb">▶️</div><div class="video-info"><small>YOUTUBE</small><h3>Founder Conversations</h3><p class="sub">Watch Retail Network interviews on YouTube.</p></div></a>
+<a class="video" href="https://www.tiktok.com/@retail_network?_r=1&amp;_t=ZS-9BLedIBUUtB" target="_blank" rel="noopener noreferrer"><div class="video-thumb">▶️</div><div class="video-info"><small>TIKTOK</small><h3>Short-Form Stories</h3><p class="sub">Discover quick conversations from Retail Network.</p></div></a>
+<a class="video" href="https://www.instagram.com/retail_network?psln=Y3RsajZweTI0MW1r&amp;utm_source=qr" target="_blank" rel="noopener noreferrer"><div class="video-thumb">▶️</div><div class="video-info"><small>INSTAGRAM</small><h3>Behind the Interviews</h3><p class="sub">Explore interviews and updates from Retail Network.</p></div></a>
 </div>
 </div>
 </section>
@@ -393,28 +603,25 @@ footer {
 <div>
 <div class="label">THE JOURNEY</div>
 <h2>Our Story</h2>
-<p class="sub">Tell the story of how Retail Network began, what inspired the first interviews and how the community is growing.</p>
+<p class="sub">Retail Network began with zero shortcuts: late-night conversations with retail workers after their shifts. Those rooftop and street-side interviews grew into a global platform connecting founders and business leaders.</p>
 </div>
 <div class="timeline">
-<p><strong>2025 – The Beginning</strong>Add your real starting story here.</p>
-<p><strong>Growing the Community</strong>Describe your first interviews and connections.</p>
-<p><strong>The Road Ahead</strong>Share your future plans.</p>
+<p><strong>Humble Beginnings</strong>At midnight, Hammud respectfully asked retail employees finishing their shifts to share their stories.</p>
+<p><strong>Built Through Resilience</strong>Rooftop and street-side interviews grew from a passion for content creation and human connection.</p>
+<p><strong>A Global Platform</strong>Retail Network now connects founders and business leaders from around the world.</p>
 </div>
 </div>
 </section>
 
 <section id="founder">
-<div class="wrap split">
-<div>
+<div class="wrap founder-profile">
+<img class="founder-profile-image" src="https://i.ibb.co/Kpp1JG96/OVNO4458.png" alt="Hammud Al Mahim">
+<div class="founder-profile-copy">
 <div class="label">BEHIND THE PLATFORM</div>
 <h2>Meet the Founder</h2>
-<p class="sub">Introduce yourself, your background, why you started Retail Network and how you manage interviews and content.</p>
-<h3>[Your Name]</h3>
-<p class="sub">Founder, Retail Network</p>
-</div>
-<div class="panel">
-<h3>What Drives This Platform?</h3>
-<p class="sub">Curiosity, conversations and the belief that every professional has a story worth sharing.</p>
+<h3>HAMMUD AL MAHIM</h3>
+<p class="founder-profile-title">Founder &amp; CEO, Retail Network</p>
+<p class="founder-bio">Balancing a demanding career as a seaman in the shipping line while fueling an absolute passion for content creation, Hammud Al Mahim built Retail Network from the ground up through sheer grit. The journey began with incredibly humble and difficult roots—waiting by the bins late at night around midnight when retail employees finished their shifts, respectfully requesting them to share their stories. From those late-night rooftop and street-side interviews to connecting global founders, this platform is built on absolute resilience and a deep love for human connection.</p>
 </div>
 </div>
 </section>
@@ -425,28 +632,54 @@ footer {
 <h2>Follow Retail Network</h2>
 <p class="sub">Find our latest interviews, videos and updates.</p>
 <div class="socials">
-<a class="social" href="https://instagram.com/" target="_blank">Instagram<small>Follow us</small></a>
-<a class="social" href="https://youtube.com/" target="_blank">YouTube<small>Watch videos</small></a>
-<a class="social" href="https://tiktok.com/" target="_blank">TikTok<small>Watch Reels</small></a>
-<a class="social" href="https://facebook.com/" target="_blank">Facebook<small>Visit our page</small></a>
-<a class="social" href="https://linkedin.com/" target="_blank">LinkedIn<small>Connect with us</small></a>
-<a class="social" href="https://whatsapp.com/" target="_blank">WhatsApp<small>Contact us</small></a>
-<a class="social" href="https://bilibili.com/" target="_blank">BiliBili<small>Watch videos</small></a>
+<a class="social" href="https://www.youtube.com/@Retail_network" target="_blank" rel="noopener noreferrer">YouTube<small>Watch videos</small></a>
+<a class="social" href="https://www.instagram.com/retail_network?psln=Y3RsajZweTI0MW1r&amp;utm_source=qr" target="_blank" rel="noopener noreferrer">Instagram<small>Follow us</small></a>
+<a class="social" href="https://www.tiktok.com/@retail_network?_r=1&amp;_t=ZS-9BLedIBUUtB" target="_blank" rel="noopener noreferrer">TikTok<small>Watch Reels</small></a>
+<a class="social" href="https://www.facebook.com/share/1ChctZphX1/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Facebook<small>Visit our page</small></a>
+<a class="social" href="https://www.linkedin.com/in/retail-network-1713ba406?utm_source=share_via&amp;utm_content=profile&amp;utm_medium=member_ios" target="_blank" rel="noopener noreferrer">LinkedIn<small>Connect with us</small></a>
+<a class="social" href="https://x.com/" target="_blank" rel="noopener noreferrer">X (Twitter)<small>Follow our updates</small></a>
+<a class="social" href="https://www.threads.net/" target="_blank" rel="noopener noreferrer">Threads<small>Join our Threads</small></a>
+<a class="social" href="https://www.bilibili.com/" target="_blank" rel="noopener noreferrer">BiliBili<small>Watch videos</small></a>
 </div>
 </div>
 </section>
 
 <section id="contact">
-<div class="wrap split">
+<div class="wrap">
+<div class="section-head">
 <div>
 <div class="label">GET IN TOUCH</div>
 <h2>Contact Us</h2>
 <p class="sub">Interested in an interview, collaboration or partnership? Reach out to Retail Network.</p>
 </div>
-<div class="contact">
-<p><strong>Email</strong><br><a href="mailto:your-email@example.com">your-email@example.com</a></p>
-<p><strong>Location</strong><br>Doha, Qatar</p>
+ </div>
+<div class="contact-layout">
+<div class="contact-details">
+<p><span aria-hidden="true">📧</span> <strong>Email</strong><br><a href="mailto:hamodbinalmahim@gmail.com">hamodbinalmahim@gmail.com</a></p>
+<p><span aria-hidden="true">📱</span> <strong>Phone / WhatsApp</strong><br><a href="tel:+97431288172">+974 31288172</a> · <a href="https://wa.me/97431288172" target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
+<p><span aria-hidden="true">📍</span> <strong>Location</strong><br>Doha, Qatar</p>
 <p><strong>Social Media</strong><br><a href="#social">Connect with us ↗️</a></p>
+</div>
+<form class="contact-form" id="contact-form" action="mailto:hamodbinalmahim@gmail.com" method="post" enctype="text/plain">
+<div class="contact-field">
+<label for="contact-name">Name</label>
+<input id="contact-name" name="name" type="text" autocomplete="name" required>
+</div>
+<div class="contact-field">
+<label for="contact-email">Email</label>
+<input id="contact-email" name="email" type="email" autocomplete="email" required>
+</div>
+<div class="contact-field">
+<label for="contact-phone">Phone Number</label>
+<input id="contact-phone" name="phone" type="tel" autocomplete="tel" required>
+</div>
+<div class="contact-field">
+<label for="contact-message">Message / Description</label>
+<textarea id="contact-message" name="message" rows="5" required></textarea>
+</div>
+<button class="contact-submit" type="submit">Send Message</button>
+<p class="contact-note">This opens a prefilled email in your default mail app for you to review and send.</p>
+</form>
 </div>
 </div>
 </section>
@@ -464,12 +697,54 @@ footer {
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
 
+let activeCategory = "founders";
+
 function filterCards() {
-  const query = document.getElementById("search").value.toLowerCase();
+  const query = document.getElementById("search").value.trim().toLowerCase();
+  let visibleCount = 0;
+
   document.querySelectorAll(".founder").forEach(card => {
-    card.style.display = card.dataset.search.includes(query) ? "grid" : "none";
+    const matchesCategory = activeCategory === "all" || card.dataset.category === activeCategory;
+    const searchableText = `${card.dataset.search} ${card.querySelector(".company").textContent} ${card.querySelector("h3").textContent}`.toLowerCase();
+    const matchesSearch = searchableText.includes(query);
+    const isVisible = matchesCategory && matchesSearch;
+    card.style.display = isVisible ? "grid" : "none";
+    if (isVisible) visibleCount++;
   });
+
+  document.getElementById("empty-results").hidden = visibleCount > 0;
 }
+
+function setActiveCategory(category) {
+  activeCategory = category;
+  document.querySelectorAll(".stats .stat").forEach(button => {
+    button.setAttribute("aria-pressed", String(button.dataset.category === category));
+  });
+  document.getElementById("all-filter").setAttribute("aria-pressed", String(category === "all"));
+  filterCards();
+}
+
+document.querySelectorAll(".stats .stat").forEach(button => {
+  button.addEventListener("click", () => {
+    setActiveCategory(button.dataset.category);
+    document.getElementById("interviews").scrollIntoView({ behavior: "smooth" });
+  });
+});
+
+document.getElementById("all-filter").addEventListener("click", () => setActiveCategory("all"));
+document.getElementById("search").addEventListener("input", filterCards);
+
+document.getElementById("contact-form").addEventListener("submit", event => {
+  event.preventDefault();
+  const formData = new FormData(event.currentTarget);
+  const name = formData.get("name");
+  const email = formData.get("email");
+  const phone = formData.get("phone");
+  const message = formData.get("message");
+  const subject = `Website enquiry from ${name}`;
+  const body = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${message}`;
+  window.location.href = `mailto:hamodbinalmahim@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+});
 
 document.querySelectorAll("nav a").forEach(link => {
   link.addEventListener("click", () => {
